@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Data, models and outputs: never committed (dataset licences forbid redistribution)
+data/
+models/
+results/
+unsloth_compiled_cache/
+*.png
+*.jpg
+*.jpeg
+*.dcm
+*.mhd
+*.raw
+*.safetensors
+!app/examples/*.png
+
+# Secrets
+.env
+.env.*
+
+# Editor and OS
+.vscode/
+.idea/
+.gradio/
+Thumbs.db

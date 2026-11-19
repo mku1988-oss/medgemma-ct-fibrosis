@@ -1,0 +1,56 @@
+MedGemma CT Fibrosis
+Copyright 2026 Manu Unni
+
+The source code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE).
+
+================================================================================
+Model weights
+================================================================================
+
+The fine-tuned LoRA adapter published at
+https://huggingface.co/mku1988/medgemma-ct-fibrosis is a Model Derivative of
+MedGemma 1.5 4B (google/medgemma-1.5-4b-it). It has been modified from the
+original by LoRA fine-tuning for pulmonary fibrosis classification on chest
+CT slices.
+
+HAI-DEF is provided under and subject to the Health AI Developer Foundations
+Terms of Use found at https://developers.google.com/health-ai-developer-foundations/terms
+
+Use of the model is subject to those Terms of Use, including the use
+restrictions in Section 3.2 and the Prohibited Use Policy at
+https://developers.google.com/health-ai-developer-foundations/prohibited-use-policy
+
+The 4-bit base model used for training and inference is
+unsloth/medgemma-1.5-4b-it-unsloth-bnb-4bit, a quantised copy of MedGemma 1.5
+4B distributed under the same terms.
+
+================================================================================
+Training data (not redistributed)
+================================================================================
+
+OSIC Pulmonary Fibrosis Progression
+  Open Source Imaging Consortium
+  https://www.kaggle.com/c/osic-pulmonary-fibrosis-progression
+  Licensed under CC BY-SA 4.0, subject to the competition rules. Recipients
+  agree not to use the data to develop tools intended to cause harm to human
+  beings, to develop tools for harmful discrimination of patients with
+  idiopathic pulmonary fibrosis or other fibrotic lung disease (such as
+  reducing access to health care), or to re-identify patients.
+
+LUNA16
+  https://luna16.grand-challenge.org/
+  Licensed under CC BY 4.0. Derived from LIDC-IDRI (The Cancer Imaging
+  Archive), licensed under CC BY 3.0.
+
+================================================================================
+Software
+================================================================================
+
+Unsloth             Apache License 2.0    https://github.com/unslothai/unsloth
+Hugging Face Transformers, PEFT, TRL
+                    Apache License 2.0    https://github.com/huggingface
+PyTorch             BSD-3-Clause          https://github.com/pytorch/pytorch
+Gradio              Apache License 2.0    https://github.com/gradio-app/gradio
+pydicom             MIT                   https://github.com/pydicom/pydicom
+SimpleITK           Apache License 2.0    https://github.com/SimpleITK/SimpleITK
