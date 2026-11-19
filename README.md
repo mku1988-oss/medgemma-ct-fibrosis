@@ -38,6 +38,12 @@ the image alone. This matches how the model is used in practice.
 | Specificity | n/a | 87.8% (43 of 49) |
 | Responses in the required output format | 0% | 98 to 100% |
 
+**Run-to-run variation.** Inference with 4-bit weights on a GPU is not bit-for-bit
+deterministic, so a few borderline slices can change their vote between runs. In
+three independent evaluations of the released model, patient-level accuracy was
+88.9%, 88.9% and 90.1% (a difference of one patient). The table reports the lower
+value.
+
 **Robustness.** The model was also tested with deliberately misleading clinical
 text: fibrosis patients described as routine screening cases, and normal patients
 described with a disease-style history. Accuracy under these conditions was 85.2%,
