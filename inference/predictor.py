@@ -8,6 +8,7 @@ Research use only. Not for clinical use.
 """
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import List
 
 # Unsloth must be imported before transformers and peft.
@@ -22,6 +23,10 @@ from training.prompt import build_messages, parse_answer
 
 BASE_MODEL = "unsloth/medgemma-1.5-4b-it-unsloth-bnb-4bit"
 ADAPTER = "mku1988/medgemma-ct-fibrosis"
+
+# Adapter version this code was released with. Pinning it means this version
+# of the code keeps loading the same weights after newer adapters are published.
+ADAPTER_REVISION = "v1.0"
 
 # The fine-tuned model answers in a few tokens. The base model tends to
 # explain its reasoning, so it needs a longer limit.
@@ -42,12 +47,17 @@ class FibrosisPredictor:
         adapter: Hugging Face repository or local folder with the LoRA
             adapter. None runs the base model without fine-tuning.
         base_model: The 4-bit base model the adapter was trained on.
+        revision: Adapter version (tag) on Hugging Face. Ignored for a
+            local folder.
     """
 
-    def __init__(self, adapter: str = ADAPTER, base_model: str = BASE_MODEL):
+    def __init__(self, adapter: str = ADAPTER, base_model: str = BASE_MODEL,
+                 revision: str = ADAPTER_REVISION):
         model, self.processor = FastVisionModel.from_pretrained(base_model, load_in_4bit=True)
         if adapter:
-            model = PeftModel.from_pretrained(model, adapter, is_trainable=False)
+            is_local = Path(adapter).exists()
+            model = PeftModel.from_pretrained(model, adapter, is_trainable=False,
+                                              revision=None if is_local else revision)
         FastVisionModel.for_inference(model)
         self.model = model
         self.max_new_tokens = MAX_NEW_TOKENS_FINE_TUNED if adapter else MAX_NEW_TOKENS_BASE
